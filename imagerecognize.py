@@ -8,11 +8,11 @@ plt.imshow(test_image_gray, cmap='gray')
 def convertToRGB(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-haar_cascade_face = cv2.CascadeClassifier('data/haarcascades/haarcascade_frontalface_alt2.xml')
-product_rects = haar_cascade_face.detectMultiScale(test_image_gray, scaleFactor = 1.2, minNeighbors = 5);
+haar_cascade_product = cv2.CascadeClassifier('data/haarcascades/haarcascade_frontalface_alt2.xml')
+product_rects = haar_cascade_product.detectMultiScale(test_image_gray, scaleFactor = 1.2, minNeighbors = 5);
 
 print('Faces found: ', len(product_rects))
-for (x,y,w,h) in faces_rects:
+for (x,y,w,h) in product_rects:
      cv2.rectangle(test_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
 plt.imshow(convertToRGB(test_image))
@@ -27,7 +27,7 @@ def detect_faces(cascade, test_image, scaleFactor = 1.1):
         
     return image_copy
 test_image2 = cv2.imread('group.jpg')
-products = detect_faces(haar_cascade_face, test_image2)
+products = detect_product(haar_cascade_product, test_image2)
 
 plt.imshow(convertToRGB(products))
 cv2.imwrite('image1.png',products)
